@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    nav {
+      background: rgba(255 255 255 / 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      user-select: none;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+    }
+
+    nav h2 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #222;
+    }
+
+    nav .logout-btn {
+      background: #dc3545;
+      border: none;
+      padding: 8px 16px;
+      font-weight: 600;
+      border-radius: 20px;
+      cursor: pointer;
+      color: white;
+      transition: background 0.3s ease;
+      user-select: none;
+      box-shadow: 0 4px 12px rgb(220 53 69 / 0.5);
+    }
+
+    nav .logout-btn:hover {
+      background: #b02a37;
+      box-shadow: 0 6px 18px rgb(176 42 55 / 0.7);
+    }
+
+    main {
+      flex: 1;
+      padding: 60px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      text-align: center;
+      background: transparent;
+    }
+
+    main h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #222;
+      user-select: none;
+      /* subtle text shadow for contrast */
+      text-shadow: 0 1px 3px rgb(0 0 0 / 0.05);
+    }
+
+    .cards {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .card {
+      background: rgba(255 255 255 / 0.85);
+      border-radius: 20px;
+      padding: 30px;
+      width: 250px;
+      box-shadow: 0 8px 32px rgb(0 0 0 / 0.07);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      user-select: none;
+      color: #222;
+      border: 1px solid #eee;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 14px 40px rgb(0 0 0 / 0.12);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-weight: 700;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      font-size: 1rem;
+      line-height: 1.4;
+      margin: 0;
+      color: #444;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .card {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h2>My Dashboard</h2>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </nav>
+
+  <main>
+    <h1 id="welcomeMsg">Welcome to your dashboard!</h1>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Profile Info</h3>
+        <p>Name: <strong id="profileName">User</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>Messages</h3>
+        <p>You have <strong>3 new messages</strong>.</p>
+      </div>
+
+      <div class="card">
+        <h3>Settings</h3>
+        <p>Manage your preferences and account settings.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Load user name from localStorage
+    const name = localStorage.getItem("signup-name") || "User";
+    document.getElementById("welcomeMsg").textContent = `Welcome back, ${name}!`;
+    document.getElementById("profileName").textContent = name;
+
+    // Logout button clears localStorage and redirects to login
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.clear();
+      alert("You have been logged out.");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
